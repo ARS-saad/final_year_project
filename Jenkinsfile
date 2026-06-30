@@ -29,14 +29,14 @@ pipeline {
             }
         }
 
-        stage('deploy to k8s') {
-            steps {
-                script {
-                    sh './k8s/deploy.sh'
-                    sh 'kubectl rollout restart deployment.apps/travel_agency-deployment'
-                }
-            }
-        }
+//        stage('deploy to k8s') {
+//            steps {
+//                script {
+//                    sh './k8s/deploy.sh'
+//                    sh 'kubectl rollout restart deployment.apps/travel_agency-deployment'
+//                }
+//            }
+//        }
     }
 
     post {
