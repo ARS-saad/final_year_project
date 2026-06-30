@@ -41,7 +41,6 @@ pipeline {
 
     post {
         always {
-            up the Jenkins agent's disk space
             sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG} || true"
         }
     }
