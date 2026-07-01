@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: travel_agency-deployment
+  name: travel-agency-deployment
 spec:
   replicas: 2
   selector:
