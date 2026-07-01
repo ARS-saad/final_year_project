@@ -6,14 +6,14 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: myapp
+      app: travel_agency
   template:
     metadata:
       labels:
-        app: myapp
+        app: travel_agency
     spec:
       containers:
-        - name: myapp-container
+        - name: travel_agency-container
           image: 890iop/travel_agency:latest
           imagePullPolicy: Always
           ports:
