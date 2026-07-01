@@ -42,8 +42,7 @@ pipeline {
     post {
         always {
             sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG} || true"
-        }
-        always {
+
             cleanWs() // Automatically deletes the checkout files after the run
         }
     }
