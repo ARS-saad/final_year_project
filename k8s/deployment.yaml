@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: myapp-container
-          image: 890iop/myapp:latest
+          image: 890iop/travel_agency:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
