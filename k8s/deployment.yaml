@@ -17,4 +17,4 @@ spec:
           image: 890iop/travel_agency:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 3000
