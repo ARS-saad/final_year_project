@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                     sh './k8s/deploy.sh'
-                    sh 'kubectl rollout restart deployment.apps/travel_agency-deployment'
+                    sh 'kubectl rollout restart deployment.apps/travel-agency-deployment'
                 }
             }
         }
