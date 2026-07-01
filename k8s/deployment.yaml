@@ -10,7 +10,7 @@ spec:
   template:
     metadata:
       labels:
-        app: travel_agency
+        app: travel-agency
     spec:
       containers:
         - name: travel-agency-container
