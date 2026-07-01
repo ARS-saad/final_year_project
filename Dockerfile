@@ -19,13 +19,7 @@ COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
 ENV NEXT_TELEMETRY_DISABLED=1
-# OPTIMIZATION: Dynamically build based on lockfile present
-RUN \
-  if [ -f package-lock.json ]; then npm run build; \
-  elif [ -f yarn.lock ]; then corepack enable yarn && yarn build; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm build; \
-  else npm run build; \
-  fi
+RUN npm run build
 
 # Runner stage
 FROM node:24-slim AS runner
