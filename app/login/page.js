@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function LoginPage() {
   return (
     <div className="min-h-screen flex flex-col bg-lightbg">
       <div className="px-8 py-6">
         <Link href="/" className="font-heading font-bold text-xl text-navy">
-          Voyage<span className="text-teal">AI</span>
+          Flora<span className="text-teal">flyers</span>
         </Link>
       </div>
 
@@ -17,14 +17,17 @@ export default function LoginPage() {
           style={{
             backgroundImage:
               "linear-gradient(rgba(29,45,68,0.68), rgba(2,128,144,0.6)), url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1200&auto=format&fit=crop')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
         >
           <div>
-            <h2 className="font-heading text-3xl font-bold mb-2.5">Welcome back, explorer.</h2>
+            <h2 className="font-heading text-3xl font-bold mb-2.5">
+              Welcome back, explorer.
+            </h2>
             <p className="text-[#E4EAF0] max-w-sm text-sm">
-              Log in to manage your bookings, track your itineraries, and keep chatting with your AI travel assistant.
+              Log in to manage your bookings, track your itineraries, and keep
+              chatting with your AI travel assistant.
             </p>
           </div>
         </div>
@@ -32,7 +35,9 @@ export default function LoginPage() {
         <div className="flex-1 flex items-center justify-center p-8">
           <div className="w-full max-w-sm">
             <h1 className="font-heading text-3xl font-bold mb-2">Log In</h1>
-            <p className="text-gray-500 text-sm mb-7">Enter your details to access your account.</p>
+            <p className="text-gray-500 text-sm mb-7">
+              Enter your details to access your account.
+            </p>
 
             <div className="flex gap-2.5 bg-alert-info-bg text-alert-info-text border-l-4 border-teal-hover rounded-sm2 px-4 py-3 text-sm mb-6">
               <span>ℹ</span>
@@ -41,7 +46,12 @@ export default function LoginPage() {
 
             <form onSubmit={(e) => e.preventDefault()}>
               <div className="mb-5">
-                <label htmlFor="email" className="block text-sm font-semibold mb-1.5">Email Address</label>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-semibold mb-1.5"
+                >
+                  Email Address
+                </label>
                 <input
                   id="email"
                   type="email"
@@ -50,7 +60,12 @@ export default function LoginPage() {
                 />
               </div>
               <div className="mb-5">
-                <label htmlFor="password" className="block text-sm font-semibold mb-1.5">Password</label>
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-semibold mb-1.5"
+                >
+                  Password
+                </label>
                 <input
                   id="password"
                   type="password"
@@ -62,7 +77,12 @@ export default function LoginPage() {
                 <label className="flex items-center gap-2 text-gray-600">
                   <input type="checkbox" /> Remember me
                 </label>
-                <Link href="#" className="text-teal-hover font-semibold hover:underline">Forgot password?</Link>
+                <Link
+                  href="#"
+                  className="text-teal-hover font-semibold hover:underline"
+                >
+                  Forgot password?
+                </Link>
               </div>
               <button
                 type="submit"
@@ -88,8 +108,13 @@ export default function LoginPage() {
             </div>
 
             <div className="text-center mt-7 text-sm text-gray-500">
-              Don&apos;t have an account?{' '}
-              <Link href="/signup" className="text-teal-hover font-semibold hover:underline">Sign up</Link>
+              Don&apos;t have an account?{" "}
+              <Link
+                href="/signup"
+                className="text-teal-hover font-semibold hover:underline"
+              >
+                Sign up
+              </Link>
             </div>
           </div>
         </div>

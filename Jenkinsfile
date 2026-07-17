@@ -14,13 +14,6 @@ pipeline {
     }
 
     stages {
-//        stage('build') {
-//            steps {
-//                sh 'npm ci'
-//                sh 'npm run build'
-//            }
-//        }
-
         stage('docker login and push image to docker hub') {
             steps {
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
