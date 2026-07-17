@@ -3,7 +3,10 @@ import Link from "next/link";
 export default function Navbar({ activeChat = false }) {
   return (
     <>
-      <div className="bg-alert-info-bg text-alert-info-text text-center text-sm font-semibold py-2 px-4">
+      <div
+        className="bg-alert-info-bg text-alert-info-text text-center text-sm font-semibold py-2"
+        suppressHydrationWarning
+      >
         ✈ Summer Sale: Save up to 20% on Southeast Asia tours — use code
         Floraflyers20
       </div>
