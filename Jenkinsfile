@@ -14,7 +14,7 @@ pipeline {
         DOCKERHUB_CREDENTIALS         = credentials('dockerhub-user-pass')
         GITHUB_TOKEN                  = credentials('github-token')
         IMAGE_NAME                    = "890iop/travel_agency"
-        IMAGE_TAG                     = "${BUILD_NUMBER}" // Use build number instead of static 'latest'
+        IMAGE_TAG                     = "${BUILD_NUMBER}"
 
         // Base Supabase URL
         NEXT_PUBLIC_SUPABASE_URL      = 'http://44.218.130.6:8000'
@@ -54,9 +54,9 @@ pipeline {
                             exit 1
                         fi
 
-                        # Set environment variable for subsequent stages
-                        echo "http://${EXTERNAL_IP}:3000" > site_url.txt
-                        echo "Resolved SITE_URL: http://${EXTERNAL_IP}:3000"
+                        # Set environment variable without port 3000 (Service operates on port 80)
+                        echo "http://${EXTERNAL_IP}" > site_url.txt
+                        echo "Resolved SITE_URL: http://${EXTERNAL_IP}"
                     '''
                     // Read external URL into pipeline environment variable
                     env.NEXT_PUBLIC_SITE_URL = readFile('site_url.txt').trim()
@@ -83,12 +83,15 @@ pipeline {
             steps {
                 script {
                     sh '''
+                        # Export IMAGE_TAG so envsubst can replace it inside deployment.yaml
+                        export IMAGE_TAG="${IMAGE_TAG}"
+
                         # Substitute variables & apply remaining k8s manifests
                         envsubst < k8s/configmap.yaml | kubectl apply -f -
                         envsubst < k8s/secret.yaml | kubectl apply -f -
                         envsubst < k8s/deployment.yaml | kubectl apply -f -
 
-                        # Restart rollout to ensure pods pull the new tag
+                        # Restart rollout to ensure pods update to the latest build
                         kubectl rollout restart deployment.apps/travel-agency-deployment
                     '''
                 }

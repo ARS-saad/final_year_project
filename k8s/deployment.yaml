@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: travel-agency-container
-          image: 890iop/travel_agency:latest
+          image: 890iop/travel_agency:${IMAGE_TAG}
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
