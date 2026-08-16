@@ -25,24 +25,6 @@ pipeline {
     }
 
     stages {
-<<<<<<< HEAD
-        stage('Checkout Source Code') {
-            steps {
-                // Safely handles checkout and wipes old broken repository metadata if needed
-                checkout scmGit(
-                    userRemoteConfigs: [[url: 'https://github.com/ARS-saad/final_year_project.git', credentialsId: 'github-token']],
-                    branches: [[name: '*/main']],
-                    extensions: [[$class: 'CleanBeforeCheckout']]
-                )
-            }
-        }
-
-        stage('Docker Build & Push') {
-            steps {
-                // Securely log into Docker without leaking passwords in stdout/process trees
-                sh 'echo "$DOCKERHUB_CREDENTIALS_PSW" | docker login -u "$DOCKERHUB_CREDENTIALS_USR" --password-stdin'
-                sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
-=======
         stage('Fetch or Provision Load Balancer IP') {
             steps {
                 script {
@@ -93,18 +75,10 @@ pipeline {
                       --build-arg NEXT_PUBLIC_SUPABASE_ANON_KEY="${env.NEXT_PUBLIC_SUPABASE_ANON_KEY}" \\
                       -t ${IMAGE_NAME}:${IMAGE_TAG} .
                 """
->>>>>>> 70cd7cf (add supabase and ai assistant)
                 sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
             }
         }
 
-<<<<<<< HEAD
-        stage('Deploy to Kubernetes') {
-            steps {
-                sh 'chmod +x ./k8s/deploy.sh'
-                sh './k8s/deploy.sh'
-                sh 'kubectl rollout restart deployment.apps/travel-agency-deployment'
-=======
         stage('Deploy Application to K8s') {
             steps {
                 script {
@@ -118,7 +92,6 @@ pipeline {
                         kubectl rollout restart deployment.apps/travel-agency-deployment
                     '''
                 }
->>>>>>> 70cd7cf (add supabase and ai assistant)
             }
         }
     }
@@ -127,17 +100,7 @@ pipeline {
         always {
             // Clean up Docker images to save disk space on the agent
             sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG} || true"
-<<<<<<< HEAD
-            sh "docker logout || true"
-        }
-        success {
-            echo "Pipeline built and deployed successfully!"
-        }
-        failure {
-            echo "Pipeline failed!"
-=======
             cleanWs()
->>>>>>> 70cd7cf (add supabase and ai assistant)
         }
     }
 }
