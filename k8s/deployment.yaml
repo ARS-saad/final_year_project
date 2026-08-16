@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: travel-agency-deployment
+  namespace: default
+  labels:
+    app: travel-agency
 spec:
   replicas: 2
   selector:
@@ -18,3 +21,28 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
+              name: http
+          envFrom:
+            - configMapRef:
+                name: travel-agency-config
+            - secretRef:
+                name: travel-agency-secrets
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5

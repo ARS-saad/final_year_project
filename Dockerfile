@@ -1,4 +1,6 @@
-# Install dependencies
+# ----------------------------------------------------
+# 1. Dependencies Stage
+# ----------------------------------------------------
 FROM node:24-slim AS deps
 WORKDIR /app
 
@@ -11,17 +13,32 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-# Build the Next.js application
+# ----------------------------------------------------
+# 2. Builder Stage
+# ----------------------------------------------------
 FROM node:24-slim AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Next.js collects completely anonymous telemetry data about general usage.
+# Accept Build Arguments passed from Jenkins pipeline
+ARG NEXT_PUBLIC_SITE_URL
+ARG NEXT_PUBLIC_SUPABASE_URL
+ARG NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+# Convert ARGs to ENVs so Next.js bakes them into static JS during build
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+ENV NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL
+ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+# Disable telemetry during build
 ENV NEXT_TELEMETRY_DISABLED=1
+
 RUN npm run build
 
-# Runner stage
+# ----------------------------------------------------
+# 3. Runner Stage
+# ----------------------------------------------------
 FROM node:24-slim AS runner
 WORKDIR /app
 
