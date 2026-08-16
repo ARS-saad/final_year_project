@@ -33,7 +33,7 @@ pipeline {
                         aws eks update-kubeconfig --region ${AWS_REGION} --name ${EKS_CLUSTER_NAME}
 
                         # Apply service manifest to ensure LoadBalancer exists
-                        kubectl apply -f k8s/04-service.yaml
+                        kubectl apply -f k8s/service.yaml
 
                         echo "Waiting for LoadBalancer external IP/hostname..."
                         EXTERNAL_IP=""
